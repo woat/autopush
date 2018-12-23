@@ -1,0 +1,10 @@
+Autopush to github on file change.
+
+Default behavior is force pushing to origin/autopush.
+
+You must have git installed.
+
+Setup:
+	- $ dep ensure
+	- $ go install
+	- $ autopush path/of/dir

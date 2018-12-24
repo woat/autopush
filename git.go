@@ -32,3 +32,14 @@ func push() {
 	}
 	fmt.Println(string(gitOut))
 }
+
+// TODO: handle exit codes properly (0, 1, 128) -> (true, false, fatal)
+// TODO: take a list of paths and return all paths that are true
+func shouldIgnore(path string) bool {
+	git := exec.Command("git", "check-ignore", path)
+	_, err := git.Output() // run() ?
+	if err != nil {
+		return false
+	}
+	return true
+}

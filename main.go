@@ -6,8 +6,8 @@ import (
 
 func main() {
 	if len(os.Args) < 2 {
-		watch(os.Args[1])
+		watch("./")
 	} else {
-		watch("")
+		watch(os.Args[1])
 	}
 }

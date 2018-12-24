@@ -8,3 +8,7 @@ Setup:
 	- $ dep ensure
 	- $ go install
 	- $ autopush path/of/dir
+
+Dev setup:
+	- $ dep ensure
+	- $ tmux split-window \; send-keys "make run" Enter  

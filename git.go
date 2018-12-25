@@ -15,8 +15,19 @@ func add() {
 }
 
 // this fucks up when we remove a dir
-func commit(msg string) {
+func commit(msg string) error {
 	git := exec.Command("git", "commit", "-m", msg)
+	gitOut, err := git.Output()
+	if err != nil {
+		// panic(err)
+		return fmt.Errorf("Did not return 0")
+	}
+	fmt.Println(string(gitOut))
+	return nil
+}
+
+func push() {
+	git := exec.Command("git", "push", "-f", "origin", "head:autopush")
 	gitOut, err := git.Output()
 	if err != nil {
 		panic(err)
@@ -24,8 +35,8 @@ func commit(msg string) {
 	fmt.Println(string(gitOut))
 }
 
-func push() {
-	git := exec.Command("git", "push", "-f", "origin", "head:autopush")
+func reset() {
+	git := exec.Command("git", "reset", "--soft", "HEAD~1")
 	gitOut, err := git.Output()
 	if err != nil {
 		panic(err)

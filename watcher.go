@@ -23,12 +23,14 @@ func (w *watcher) handleEvents() {
 			if event.Op&fsnotify.Chmod != fsnotify.Chmod {
 				msg := fmt.Sprintf("%s: %s\n", event.Op, event.Name)
 				outf(msg)
-				// TODO: fix commit + prevent pollution
-				/*
-					add()
-					commit(msg)
+				add()
+				err := commit(msg)
+				if err != nil {
+					// handle error
+				} else {
 					push()
-				*/
+					reset()
+				}
 
 				// If dir -> Remove from watcher
 				if event.Op&fsnotify.Remove == fsnotify.Remove {

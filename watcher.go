@@ -27,10 +27,11 @@ func (w *watcher) handleEvents() {
 				add()
 				err := commit(msg)
 				if err != nil {
-					break
+					// handle error
+				} else {
+					push()
+					reset()
 				}
-				push()
-				reset()
 
 				// If dir -> Remove from watcher
 				if event.Op&fsnotify.Remove == fsnotify.Remove {
